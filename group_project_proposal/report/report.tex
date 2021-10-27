@@ -7,7 +7,7 @@
 	\begin{center}
 		\vspace*{3cm}
 
-		\textbf{ $<$ Group Title $>$ }
+		\textbf{ Predicting Ethereum Price Change Using News Articles }
        
 		\vspace{0.5cm}
 		Group Project Proposal
@@ -43,15 +43,21 @@ The market price is determined by the demand and supply of traders in the market
 
 Binance is a cryptocurrency exchange containing many popular cryptocurrencies such as Ethereum (ETH), Bitcoin (BTC), Litecoin (LTC), etc. The market price of ETH will be sourced from the platform and some processing to convert the continuous value to discrete positive (+1) and negative (-1) class labels for the project. Binance provides a set of API \footnote{\url{https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md}} and WebSocket endpoints available for the team to collect the data. 
 
+Reddit and Twitter are online social networking platforms that allow for public topic-based communication. We intend to scrape these platforms using the open source Python libraries praw for Reddit and snscrape for Twitter. Both websites offer means of narrowing the search space to only posts which are likely to be relevant to Ethereum - subreddits on Reddit, and hashtags on Twitter.
+
+Websites like Coindesk\footnote{\url{https://www.coindesk.com/price/ethereum/}}, the conversation\footnote{\url{https://theconversation.com/global/topics/ether-39759}} contain prices, articles and analysis and can be accessed using Python scraper libraries like beautiful-soup.
+
 
 
 \section{Method}
 
-What machine learning techniques are you planning to apply or improve upon?
+For the analysis of textual data retrieved from social media and news platforms, we intend to extract features by employing the bag of words model. Multiple variations of this will be tested, including the use of bi- and trigrams, word pruning, and n-gram hashing.
+
+The team is planning to use KNN and logistic regression, while working on weekly assignments, it has been observed that the performance of these models is good so that could be a good starting point. The team will look to Improve the models by selecting optimal ‘k’, ‘q’, ‘c’ values and choosing appropriate penalty (L1 or L2) whatever suits best to our models.
 
 \section{Intended Experiments}
 
-What experiments are you planning to run? How do you plan to evaluate your machine learning algorithm?
+Cross-validation will be used to determine the hyperparameters for learning techniques mentioned in the previous section. The model performance of each learning technique will be evaluated by precision, accuracy, F1-score, ROC and AUC. Baseline models such as always predicting the mean and random prediction will be used to compare model performances.
 
 
 \end{document}
