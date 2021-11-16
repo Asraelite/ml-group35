@@ -1,0 +1,1 @@
+TRADES_HEADER = ["tradeId", "price", "qty", "quoteQty", "time", "isBuyerMaker", "isBestMatch"]
