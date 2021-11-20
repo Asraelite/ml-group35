@@ -65,13 +65,121 @@ class Webscraper:
             'text': ''.join(text_body),
         }
 
+    def reviews(self):
+        URL = "https://www.gartner.com/reviews/market/blockchain-platforms/vendor/ethereum-foundation/product/ethereum/reviews"
+        page = requests.get(URL)
+
+        soup = BeautifulSoup(page.content, "html.parser")
+        # print(soup.find('ul', class_='all-reviews'))
+        string_to_consider = ''
+        for text in soup.find_all('script'):
+            if text.contents:
+                if text.contents[0].strip().startswith('var pre'):
+                    string_to_consider = text.contents[0].strip()
+                    x = text.contents[0].strip()
+        text = 'go'
+        index_1 = 0
+        start = 0
+        all_reviews = []
+        while text != "":
+            index_1 = string_to_consider.find('reviewHeadline', index_1 + start)
+            index_2 = string_to_consider.find('reviewHeadline', index_1 + 1)
+            text = string_to_consider[index_1: index_2]
+            all_reviews.append(text)
+            start = 1
+            print(string_to_consider[index_1: index_2])
+
+        for review in all_reviews:
+            print(review)
+        del all_reviews[0]
+        del all_reviews[5]
+        del all_reviews[5]
+        del all_reviews[5]
+        del all_reviews[5]
+        del all_reviews[5]
+        reviews_list = {}
+        c=1
+        for review in all_reviews:
+            # print(review)
+            print()
+            print()
+            for parts in review.split('",'):
+                # if 'Headline' in parts.split(':')[0]:
+                #     print(parts.split(':')[0][:-2])
+                #     print(parts.split(':')[1].split('"')[1][:-2])
+                if 'Summary' in parts.split(':')[0]:
+                    # print(parts.split(':')[0].split('"')[1][:-1])
+                    # print(parts.split(':')[1].split('"')[1][:-2])
+                    reviews_list[str(c)] = parts.split(':')[1].split('"')[1][:-2]
+                    c += 1
+
+        print(reviews_list)
+        with open('scraped_reviews.json', 'w') as outfile:
+            json.dump(reviews_list, outfile, indent=4)
+
+
+    def reviews_1(self):
+        URL = "https://www.gartner.com/reviews/market/blockchain-platforms/vendor/ethereum-foundation/product/ethereum/likes-dislikes"
+        page = requests.get(URL)
+
+        soup = BeautifulSoup(page.content, "html.parser")
+        print(soup.prettify())
+        string_to_consider = ''
+        for text in soup.find_all('script'):
+            if text.contents:
+                if text.contents[0].strip().startswith('var pre'):
+                    string_to_consider = text.contents[0].strip()
+                    x = text.contents[0].strip()
+
+        print(string_to_consider)
+        text = 'go'
+        index_1 = 0
+        start = 0
+        all_likes = []
+        while text != "":
+            index_1 = string_to_consider.find('lessonslearned-like-most', index_1 + start)
+            index_2 = string_to_consider.find('lessonslearned-like-most', index_1 + 1)
+            text = string_to_consider[index_1: index_2]
+            all_likes.append(text.split('}')[0])
+            start = 1
+            print(string_to_consider[index_1: index_2].split('}')[0])
+        text = 'go'
+        index_1 = 0
+        start = 0
+        all_dislikes = []
+        while text != "":
+            index_1 = string_to_consider.find('lessonslearned-dislike-most', index_1 + start)
+            index_2 = string_to_consider.find('lessonslearned-dislike-most', index_1 + 1)
+            text = string_to_consider[index_1: index_2]
+            all_dislikes.append(text.split('}')[0])
+            start = 1
+            print(string_to_consider[index_1: index_2].split('}')[0])
+
+        all_reviews = {}
+        likes = []
+        for like in all_likes[:-1]:
+            print(like.split(':')[1].split('"')[1][0:-1].strip())
+            likes.append(like.split(':')[1].split('"')[1][0:-1].strip())
+        dislikes = []
+        for dislike in all_dislikes[:-1]:
+            print(dislike.split(':')[1].split('"')[1][0:-1].strip())
+            dislikes.append(dislike.split(':')[1].split('"')[1][0:-1].strip())
+        all_reviews['Likes'] = likes
+
+        all_reviews['DisLikes'] = dislikes
+
+        with open('likes_and_dislikes.json', 'w') as outfile:
+            json.dump(all_reviews, outfile, indent=4)
+
+
     def write_data_to_json(self):
         with open('scraped_data.json', 'w') as outfile:
             json.dump(self.scraped_data, outfile, indent=4)
 
-scarper = Webscraper()
-scarper.scrape_indpendent_co_uk_website()
-scarper.scrape_theconversation_website()
-scarper.scrape_jeangalea_website()
-scarper.write_data_to_json()
 
+scarper = Webscraper()
+# scarper.scrape_indpendent_co_uk_website()
+# scarper.scrape_theconversation_website()
+# scarper.scrape_jeangalea_website()
+# scarper.write_data_to_json()
+scarper.reviews_1()
