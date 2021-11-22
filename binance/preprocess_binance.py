@@ -14,8 +14,8 @@ def read_csv(filename):
     df.set_index('time', inplace=False)        
     return df    
 
-def process_df(df):
-    df_hourly = df.resample('H',on="time")
+def process_df(df, rule):
+    df_hourly = df.resample(rule,on="time")
     mean_df = df_hourly.mean()
     std_df = df_hourly.std()    
     sum_df = df_hourly.sum()
@@ -34,10 +34,16 @@ def main():
     parser = argparse.ArgumentParser()    
     parser.add_argument('--data', help='CSV Binance file', type=str) 
     parser.add_argument('--output', help='CSV Binance file', type=str) 
+    parser.add_argument('--rule', help='H for hours, D for days', type=str, default ="D") 
     args = parser.parse_args()    
 
+    if args.rule not in ["H","D"]:
+        print("Invalid rule parameter")
+        exit(1)
+
+
     df = read_csv(args.data)
-    df = process_df(df)
+    df = process_df(df, args.rule)
 
     df.to_csv(args.output, index=False)
 
