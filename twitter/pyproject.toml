@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "machine_learning_group_35_scraping"
+version = "0.1.0"
+description = ""
+authors = ["Markus Scully <mascully@tcd.ie>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+psaw = "^0.1.0"
+yapf = "^0.31.0"
+toml = "^0.10.2"
+snscrape = {git = "https://github.com/JustAnotherArchivist/snscrape.git"}
+
+[tool.poetry.dev-dependencies]
+yapf = "^0.31.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
