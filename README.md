@@ -3,8 +3,8 @@
 ## Contents
 1. Generating dataset  
   1.1 [Binance Trade Data](#binance-trade-data)  
-  1.2 [Reddit comment data](#reddit-comment-data)
-  1.3 [Twitter tweet data](#twitter-tweet-data)
+  1.2 [Reddit comment data](#reddit-comment-data)  
+  1.3 [Twitter tweet data](#twitter-tweet-data)  
 2. 
 
 ## Generating dataset
@@ -39,7 +39,7 @@ The boolean `GROUP_BY_HOUR` in the source code can be adjusted to `True` or `Fal
 		"hour": "1900-01-01T00",
 		"comments": [
 			{
-				"user": "reddit_userna,e",
+				"user": "reddit_username",
 				"subreddit": "Ethereum",
 				"timestamp": 1515709116,
 				"karma": 4,
