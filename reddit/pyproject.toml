@@ -9,6 +9,7 @@ python = "^3.9"
 psaw = "^0.1.0"
 yapf = "^0.31.0"
 toml = "^0.10.2"
+snscrape = {git = "https://github.com/JustAnotherArchivist/snscrape.git"}
 
 [tool.poetry.dev-dependencies]
 yapf = "^0.31.0"
