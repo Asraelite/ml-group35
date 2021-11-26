@@ -1,0 +1,20 @@
+336000 tweets
+1400 days
+Creating n-grams
+sizes: (1400, 16723), (1400,)
+16723 features
+regression:
+[[ 51   2  68]
+ [  2   1   6]
+ [ 44   3 123]]
+accuracy: 0.5833333333333334
+most frequent baseline:
+[[43 48 30]
+ [ 3  2  4]
+ [46 57 67]]
+accuracy: 0.5666666666666667
+random baseline:
+[[43 48 30]
+ [ 3  2  4]
+ [46 57 67]]
+accuracy: 0.37333333333333335
