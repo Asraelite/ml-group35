@@ -1,0 +1,73 @@
+\documentclass[transmag]{IEEEtran}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{hyperref}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{bbold}
+\usepackage{listings}
+\usepackage{pdfpages}
+\usepackage{lastpage}
+\usepackage{lipsum}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%\markboth{$>$ REPLACE THIS LINE WITH YOUR PAPER IDENTIFICATION NUMBER $<$}
+%{$>$ REPLACE THIS LINE WITH YOUR PAPER IDENTIFICATION NUMBER $<$}
+\begin{document}
+
+
+
+\title{Predicting Ethereum Price Change Using News Articles}
+
+\author{\IEEEauthorblockN{Ashutosh Bansal}
+\textit{19323385}
+\and
+\IEEEauthorblockN{Ming Jun Lim}
+\textit{21337483}
+\and
+\IEEEauthorblockN{Markus Scully}
+\IEEEauthorblockA{
+\textit{16321114}}}
+
+
+
+
+\maketitle
+\thispagestyle{plain}
+\pagestyle{plain}
+
+
+%\section{INTRODUCTION}
+\section{Introduction}
+% explain the problem and why it is interesting
+\IEEEPARstart{T}{he} cryptocurrency market have witnessed an explosion in the recent years with Bitcoin\footnote{\ Bitcoin is the first well known cryptocurrency started in the late 2000s} hitting lots of new time high and many investors moving to this trading space \cite{huy2019predicting}. With the internet constantly evolving, social networking sites such as Facebook, Twitter, Instagram and etc have become a means of communication between people. There have been researchesin text sentiment analysis to predict price changes for Bitcoin \cite{huy2019predicting}\cite{sattarov2020forecasting} as Bitcoin is considered a dominant cryptocurrency. However many other cryptocurrency have been developed and have been in demand such as Ethereum \footnote{\ Ethereum is programmable blockchain and cryptocurrency described as Ether}. The project will be tackling Ethereum market price by estimating if the future price increases or decreases based on text processing sourced from the web such as social networking sites and forums. The problem is converted into a classfication problem by comparing the future market price with current market price instead of a regression problem of estimating the future market price. Can news or posts of Ethereum articles really affect the market price?
+
+The input to our algorithm is text sourced web scrapers on social networking sites. We then compare several machine learning methods such as k-Nearest Neighbours (kNN), logistic regression and Support Vector Machine (SVM) to output a predicted label, +1 if price increased or -1 if price decreased.
+
+\section{Dataset and Features}
+
+\section{Methods}
+
+\section{Experiments}
+
+\section{Results}
+
+\section{Discussion}
+
+\section{Summary}
+
+
+
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{bibliography.bib}
+
+
+\newpage\null\thispagestyle{empty}\newpage
+
+\end{document}
