@@ -11,6 +11,7 @@
 \usepackage{pdfpages}
 \usepackage{lastpage}
 \usepackage{lipsum}
+\usepackage{hyperref}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 %\markboth{$>$ REPLACE THIS LINE WITH YOUR PAPER IDENTIFICATION NUMBER $<$}
 %{$>$ REPLACE THIS LINE WITH YOUR PAPER IDENTIFICATION NUMBER $<$}
@@ -46,6 +47,18 @@
 The input to our algorithm is text sourced web scrapers on social networking sites. We then compare several machine learning methods such as k-Nearest Neighbours (kNN), logistic regression and Support Vector Machine (SVM) to output a predicted label, +1 if price increased or -1 if price decreased.
 
 \section{Dataset and Features}
+The dataset consists of input Ethereum related articles and class labels gathered from Twitter, Reddit and Binance\footnote{\ Binance is one of the largest cryptocurrency exchange}.
+
+% Twitter
+
+% Reddit
+
+% Binance
+Binance provides a set of API\footnote{\url{https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md}}, WebSocket endpoints available to collect live data and old historical data\footnote{\ \url{https://github.com/binance/binance-public-data}}. Monthly trade data of ETHUSDT\footnote{\ ETHUSDT is a symbol for Ethereum and USDT pair, 1 USDT is 1 USD.} symbol is collected from August, 2017 to October, 2021 with a total of 657,446,190 data points. These data points are processed by calculating the average price by days and discretizing the continuous values into +1 and -1 class labels by comparing it with the previous day resulting into 1,537 data points.
+
+
+
+
 
 \section{Methods}
 
