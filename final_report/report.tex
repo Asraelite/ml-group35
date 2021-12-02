@@ -12,6 +12,7 @@
 \usepackage{lastpage}
 \usepackage{lipsum}
 \usepackage{hyperref}
+\graphicspath{ {../notebook/img/} }
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 %\markboth{$>$ REPLACE THIS LINE WITH YOUR PAPER IDENTIFICATION NUMBER $<$}
 %{$>$ REPLACE THIS LINE WITH YOUR PAPER IDENTIFICATION NUMBER $<$}
@@ -63,6 +64,17 @@ Reddit is divided into smaller sub-communities relating to specific themes calle
 \subsubsection{Binance}
 Binance provides a set of API \cite{binance_web_socket}, WebSocket endpoints available to collect live data and old historical data \cite{binance_public_data}. Monthly trade data of ETHUSDT\footnote{\ ETHUSDT is a symbol for Ethereum and USDT pair, 1 USDT is 1 USD.} symbol is collected from August, 2017 to October, 2021 with a total of 657,446,190 data points. These data points are processed by calculating the average price by days and discretizing the continuous values into +1 and -1 class labels by comparing it with the previous day resulting into 1,537 data points.
 
+\begin{figure}[h!]
+    \centering
+    \subfloat[Mean price against Data points]{{\includegraphics[width=0.5\columnwidth]{binance_mean_price.png} }}%
+%    \qquad
+    \subfloat[Count against labels]{{\includegraphics[width=0.5\columnwidth]{binance_label.png} }}%
+    \caption{Overview of Binance dataset collected}%
+    \label{fig:binance_overview}%
+\end{figure}
+
+There is another class label "0" in figure \ref{fig:binance_overview}.b. This is due to the first day of every month unable to calculate different with the day before. It was set to "-1" to have binary labels.
+
 \subsection{Feature Extraction}
 
 Several pre-processing steps are applied. The first step is tokenization, splitting input character sequences into tokens. The endings of the tokens are chopped of by stemming. The tokens are pruned using a set of stop words as they contribute little to no information such as words "is", "the", "a", etc. Tokens appearing frequently and rarely were also pruned through the \verb|min_df| and \verb|max_df| parameters in tokenization, this step was very important to reduce the feature size. The algorithm uses Natural Language Toolkit \verb|nltk| library providing stemming functions such as \verb|PorterStemmer| and a list of stopwords \verb|nltk.corpus.stopwords.words("english")|. Some general pre-processing on text data from \cite{sattarov2020forecasting} were applied onto our dataset consisting of:
@@ -76,6 +88,9 @@ Several pre-processing steps are applied. The first step is tokenization, splitt
 These sequence of tokens are mapped to a feature vector using the bag of words model, the model consists of hyper-parameter n-grams and cross validation for 1-gram single token and 2-gram pairs of token are evaluated in section ???. The n-gram hyper-parameter enables model to preserve some word ordering but feature vector size can grow quickly.
 
 \section{Methods}
+
+\subsection{k-Nearest Neighbours (kNN)}
+The K-nearest Neighbours is a supervised machine learning algorithm used to solve classification and regression problems. KNN model determines the class of the target variable by looking at its nearest neighbours which means the nearest training data points. K is the number of such data points that has to be considered in the algorithm. Since the project deals with the classification problem, the class label assigned to the majority of those neighbours has been considered to be the class for the target value.
 
 \subsection{SVM}
 SVM 
