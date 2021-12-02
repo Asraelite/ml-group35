@@ -51,7 +51,7 @@
 \noindent The dataset consists of Ethereum related articles and class labels gathered from Twitter, Reddit and Binance\footnote{\ Binance is one of the largest cryptocurrency exchange} over the last four years. Data from Twitter and Reddit are merged with a similar column names: \emph{date} \emph{content} and \emph{popularity}.
 
 \subsection{Data Source}
-
+\label{data_source}
 % twitter
 \subsubsection{Twitter}
 \noindent Twitter provides an official API for accessing tweets but access to this requires an approval process \cite{twitter_api_docs}. Instead, the open-source Python library snscrape \cite{snscrape_git} was used to collect 240 tweets for each day in the range January 2017 to October 2021, filtered by search for the word "Ethereum". The popularity content for each tweet was calculated by summing together the number of retweets, likes and replies it received. This popularity value was then normalised by dividing it by the highest popularity value of all collected tweets.
@@ -88,6 +88,7 @@
 \noindent These sequence of tokens are mapped to a feature vector using the bag of words model, the model consists of hyper-parameter n-grams and cross validation for 1-gram single token and 2-gram pairs of token are evaluated in section ???. The n-gram hyper-parameter enables model to preserve some word ordering but feature vector size can grow quickly.
 
 \section{Methods}
+\label{methods}
 
 \subsection{k-Nearest Neighbours }
 \noindent K-Nearest Neighbours (kNN) is an instance-based model that uses training data to make predictions. Given a feature vector $x$ to make prediction, the distance of $x$ is calculated with all training data, selects k closest training points and assigns majority label of the neighbours for classification problem. kNN requires a distance function, hyper-parameter \emph{k} of neighbours to be considered, weighting of neighbour points and method for aggregating \emph{k} neighbour points $N_k$. 
@@ -164,9 +165,29 @@ J(\theta) = \frac{1}{m}\sum^m_{i=1}max(0,1-y^{(i)}\theta^Tx^{(i)})+\frac{\theta^
 \end{equation}
 Equation \ref{eqn:svm_penalty} is the sum of squares elements in parameter vector that penalises large values of $\theta$. Equation \ref{eqn:svm_cost_function} is the final SVM cost function. The first term depends on how much the model predicts training data and $C$ in the penalty term is a hyper-parameter affecting training in minimising which terms in the equation. The learning selects $\theta$ that minimises cost function $J(\theta)$.
 
-\subsection{}
 
 \section{Experiments}
+\noindent 5-fold cross validation were used to select hyper-parameters for models mentioned in section \ref{methods}. The dataset metioned in section \ref{data_source} were grouped by dates resulting with a total of 1400 data points from \emph{2018-01-01} to \emph{2021-10-31}. The dataset was split into training and test set with a ratio of $80:20$. The baseline models used to evaluate against these models were a model always predicting the most common class and a model randomly predicting class.
+
+\noindent The choice of metric used for evaluation $F_1$ score, recall, precision and accuracy. The ROC curve and AUC were also plotted and compared with other classifiers and baseline.
+
+% f1 score
+\begin{equation}
+\label{eqn:f1_score}
+F_1 \textnormal{score}\ = \frac{2TP}{2TP+FN+FP}
+\end{equation}
+% recall
+\begin{equation}
+\label{eqn:recall}
+\textnormal{recall}\ = \frac{TP}{TP+FN}
+\end{equation}
+% precision
+\begin{equation}
+\label{eqn:precision}
+\textnormal{precision}\ = \frac{TP}{TP+FP}
+\end{equation}
+
+\noindent Equation (\ref{eqn:f1_score}) is the $F_1$ score metric measuring the harmonic mean of precision and recall. Equation (\ref{eqn:recall}) is the recall metric. Equation (\ref{eqn:precision}) is the precision metric. \emph{TP} represent true positive, \emph{FP} represents false positive, \emph{TN} represents true negative and \emph{FN} represents false negative.
 
 \section{Results}
 
