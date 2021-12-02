@@ -51,14 +51,13 @@ The dataset consists of Ethereum related articles and class labels gathered from
 
 \subsection{Data Source}
 
+% twitter
 \subsection{Twitter}
 Twitter provides an official API for accessing tweets but access to this requires an approval process \cite{twitter_api_docs}. Instead, the open-source Python library snscrape \cite{snscrape_git} was used to collect 240 tweets for each day in the range January 2017 to October 2021, filtered by search for the word "Ethereum". The popularity content for each tweet was calculated by summing together the number of retweets, likes and replies it received. This popularity value was then normalised by dividing it by the highest popularity value of all collected tweets.
 
+% reddit
 \subsection{Reddit}
 Reddit is divided into smaller sub-communities relating to specific themes called "subreddits". The subreddits "EtherMining", "Cryptocurrency", "Cryptocurrencies", "CryptoMarkets", "EthTrader", "Ethereum", and "Bitcoin" were selected as source of data because of their relevancy. Comments posted on submission on each of these subreddits were scraped using the library psaw which itself pulls data from service Pushshift. The popularity value of each comment was determined by its "karma" value, a measure of how much positive feedback it has received from other users of the site. Up to 240 comments were scraped per subreddit per day, for a maximum of 1680 per day if that many comments had actually been posted.
-
-% Reddit
-% preprocess
 
 % Binance
 \subsection{Binance}
