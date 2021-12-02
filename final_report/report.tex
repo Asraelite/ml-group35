@@ -89,11 +89,28 @@ These sequence of tokens are mapped to a feature vector using the bag of words m
 
 \section{Methods}
 
-\subsection{k-Nearest Neighbours (kNN)}
-The K-nearest Neighbours is a supervised machine learning algorithm used to solve classification and regression problems. KNN model determines the class of the target variable by looking at its nearest neighbours which means the nearest training data points. K is the number of such data points that has to be considered in the algorithm. Since the project deals with the classification problem, the class label assigned to the majority of those neighbours has been considered to be the class for the target value.
+\subsection{k-Nearest Neighbours }
+The K-nearest Neighbours (kNN) is a supervised machine learning algorithm used to solve classification and regression problems. KNN model determines the class of the target variable by looking at its nearest neighbours which means the nearest training data points. K is the number of such data points that has to be considered in the algorithm. Since the project deals with the classification problem, the class label assigned to the majority of those neighbours has been considered to be the class for the target value.
 
-\subsection{SVM}
-SVM 
+\subsection{Support Vector Machine}
+
+Support Vector Machine (SVM) is a classifier similar to logistic regression, the prediction uses $sign(\theta^Tx)$ and the output is mapped to $+1$ and $-1$. 
+
+\begin{equation}
+\label{eqn:hinge_loss_function}
+max(0,1-y\theta^Tx))
+\end{equation}
+
+The main difference lies in the cost function as shown in equation (\ref{eqn:hinge_loss_function}), SVM uses a "hinge" loss function. The cost function of SVM is non-smooth. There is no penalty to all values of $\theta$ when the prediction is correct. Penalty for regularisation is mandatory for SVM to get sensible behaviour due to $\theta^Tx$, scaling the term up will output loss of 0. Example prediction is $+1$ and label is $+1$, Equation \ref{eqn:hinge_loss_function} will be $max(0, 1 - (+1)(+45)) = 0$
+\begin{equation}
+\label{eqn:svm_penalty}
+\theta^T\theta = \sum^n_{j=1} \theta^2_j
+\end{equation}
+\begin{equation}
+\label{eqn:svm_cost_function}
+J(\theta) = \frac{1}{m}\sum^m_{i=1}max(0,1-y^{(i)}\theta^Tx^{(i)})+\frac{\theta^T\theta}{C}
+\end{equation}
+Equation \ref{eqn:svm_penalty} is the sum of squares elements in parameter vector that penalises large values of $\theta$. Equation \ref{eqn:svm_cost_function} is the final SVM cost function. The first term depends on how much the model predicts training data and $C$ in the penalty term is a hyper-parameter affecting training in minimising which terms in the equation. The learning selects $\theta$ that minimises cost function $J(\theta)$
 
 \subsection{}
 
