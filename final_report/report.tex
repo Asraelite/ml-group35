@@ -90,7 +90,30 @@ These sequence of tokens are mapped to a feature vector using the bag of words m
 \section{Methods}
 
 \subsection{k-Nearest Neighbours }
-The K-nearest Neighbours (kNN) is a supervised machine learning algorithm used to solve classification and regression problems. KNN model determines the class of the target variable by looking at its nearest neighbours which means the nearest training data points. K is the number of such data points that has to be considered in the algorithm. Since the project deals with the classification problem, the class label assigned to the majority of those neighbours has been considered to be the class for the target value.
+K-Nearest Neighbours (kNN) is an instance-based model that uses training data to make predictions. Given a feature vector $x$ to make prediction, the distance of $x$ is calculated with all training data, selects k closest training points and assigns majority label of the neighbours for classification problem. kNN requires a distance function, hyper-parameter \emph{k} of neighbours to be considered, weighting of neighbour points and method for aggregating \emph{k} neighbour points $N_k$. 
+
+
+% distance metric
+\begin{equation}
+\label{eqn:knn_euclidean}
+d(x^{(i)},x) = \sqrt[2]{ \sum^n_{j=1} (x^{(i)}_j - x_j)^2 }
+\end{equation}
+% weighting of neighbours
+\begin{equation}
+\label{eqn:knn_uniform}
+w^{(i)} = 1
+\end{equation}
+\begin{equation}
+\label{eqn:knn_gaussian}
+w^{(i)} = e^{-\gamma d(x^{(i)},x)^2}
+\end{equation}
+\begin{equation}
+\label{eqn:knn_classification}
+sign(\frac{ \sum_{i \in N_k} w^{(i)} y^{(i)} }{ \sum_{ i \in N_k} w^{(i)} })
+\end{equation}
+
+Equation (\ref{eqn:knn_euclidean}) is Euclidean distance commonly used for kNN.
+Equation (\ref{eqn:knn_uniform}) uniform and equation (\ref{eqn:knn_gaussian}) Gaussian are methods weighting of neighbour points. For the Gaussian weighting, training points further away from the target variable \emph{i} are attached with lesser weight compared to nearer ones. Equation (\ref{eqn:knn_classification}) is the method for aggregating \emph{k} neighbour points $N_k$, it is a majority vote when uniform weighting neighbour points is used.
 
 \subsection{Support Vector Machine}
 
@@ -110,7 +133,7 @@ The main difference lies in the cost function as shown in equation (\ref{eqn:hin
 \label{eqn:svm_cost_function}
 J(\theta) = \frac{1}{m}\sum^m_{i=1}max(0,1-y^{(i)}\theta^Tx^{(i)})+\frac{\theta^T\theta}{C}
 \end{equation}
-Equation \ref{eqn:svm_penalty} is the sum of squares elements in parameter vector that penalises large values of $\theta$. Equation \ref{eqn:svm_cost_function} is the final SVM cost function. The first term depends on how much the model predicts training data and $C$ in the penalty term is a hyper-parameter affecting training in minimising which terms in the equation. The learning selects $\theta$ that minimises cost function $J(\theta)$
+Equation \ref{eqn:svm_penalty} is the sum of squares elements in parameter vector that penalises large values of $\theta$. Equation \ref{eqn:svm_cost_function} is the final SVM cost function. The first term depends on how much the model predicts training data and $C$ in the penalty term is a hyper-parameter affecting training in minimising which terms in the equation. The learning selects $\theta$ that minimises cost function $J(\theta)$.
 
 \subsection{}
 
