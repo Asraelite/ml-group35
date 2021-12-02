@@ -115,6 +115,35 @@ sign(\frac{ \sum_{i \in N_k} w^{(i)} y^{(i)} }{ \sum_{ i \in N_k} w^{(i)} })
 \noindent Equation (\ref{eqn:knn_euclidean}) is Euclidean distance commonly used for kNN.
 Equation (\ref{eqn:knn_uniform}) uniform and equation (\ref{eqn:knn_gaussian}) Gaussian are methods weighting of neighbour points. For the Gaussian weighting, training points further away from the target variable \emph{i} are attached with lesser weight compared to nearer ones. Equation (\ref{eqn:knn_classification}) is the method for aggregating \emph{k} neighbour points $N_k$, it is a majority vote when uniform weighting neighbour points is used.
 
+\subsection{Logistic Regression}
+\noindent Logistic regression is a linear model that uses $sign(\theta^Tx)$ to quantize continuous values to output labels $+1$ when $\theta^Tx > 0$ and $-1$ when $\theta^Tx < 0$. Decision boundary is $\theta^Tx = 0$ and dataset is considered to be linearly separable when classes can be separated by decision boundary. 
+
+% weighted sum
+\begin{equation}
+\label{eqn:logistic_weighted_sum}
+\theta^Tx = \theta_0x_0 + \theta_1x_1 + ... + \theta_nx_n
+\end{equation}
+% logistic cost function
+\begin{equation}
+\label{eqn:logistic_cost}
+J(\theta) = \frac{1}{m} \sum^m_{i=1} log (1 + e^{-y^{(i)}\theta^Tx^{(i)}})
+\end{equation}
+\noindent Equation (\ref{eqn:logistic_weighted_sum}) is the weighted combination of the input features and weight. Equation (\ref{eqn:logistic_cost}) is the cost function for logistic regression. The learning algorithm uses gradient descent to minimises cost function $J(\theta)$ by pushing weights $\theta$ towards direction away from decision boundary to minimise loss. The cost function $J(\theta)$ is convex and gradient descent iterates by moving downhill reaching the minimum point.
+
+
+% L1
+\begin{equation}
+\label{eqn:logistic_l1}
+R(\theta) = \sum^n_{j=1} |\theta_j|
+\end{equation}
+% L2
+\begin{equation}
+\label{eqn:logistic_l2}
+R(\theta) = \theta^T\theta = \sum^n_{j=1}\theta^2_j
+\end{equation}
+\noindent Regularisation can be added to logistic regression by using penalty term in the cost function such as L1 penalty equation (\ref{eqn:logistic_l1}) and L2 penalty equation (\ref{eqn:logistic_l2}). These penalty terms uses hyper-parameter by affecting minimisation of first term or penalty term in learning. L1 penalty encourages sparsity of solution, causing weights to be 0. L2 penalty encourages weights $\theta$ to have smaller values.
+
+
 \subsection{Support Vector Machine}
 
 \noindent Support Vector Machine (SVM) is a classifier similar to logistic regression, the prediction uses $sign(\theta^Tx)$ and the output is mapped to $+1$ and $-1$. 
