@@ -90,7 +90,7 @@
 \section{Methods}
 \label{methods}
 
-\subsection{k-Nearest Neighbours }
+\subsection{k-Nearest Neighbours}
 \noindent K-Nearest Neighbours (kNN) is an instance-based model that uses training data to make predictions. Given a feature vector $x$ to make prediction, the distance of $x$ is calculated with all training data, selects k closest training points and assigns majority label of the neighbours for classification problem. kNN requires a distance function, hyper-parameter \emph{k} of neighbours to be considered, weighting of neighbour points and method for aggregating \emph{k} neighbour points $N_k$. 
 
 
@@ -188,6 +188,22 @@ F_1 \textnormal{score}\ = \frac{2TP}{2TP+FN+FP}
 \end{equation}
 
 \noindent Equation (\ref{eqn:f1_score}) is the $F_1$ score metric measuring the harmonic mean of precision and recall. Equation (\ref{eqn:recall}) is the recall metric. Equation (\ref{eqn:precision}) is the precision metric. \emph{TP} represent true positive, \emph{FP} represents false positive, \emph{TN} represents true negative and \emph{FN} represents false negative.
+
+\subsection{k-Nearest Neighbours}
+
+\subsection{Logistic Regression}
+
+\subsection{Support Vector Machine}
+\noindent The range of C values used are $[1, 50, 100, 300, 600, 800]$ to select hyper-parameter for the penalty term in equation (\ref{eqn:svm_cost_function}) through cross validation.
+
+\begin{figure}[h]
+	\includegraphics[width=\columnwidth]{svm_cv_ci.png} 
+    \caption{Range of C values}%
+    \label{fig:svm_c}%
+\end{figure}
+
+\noindent Figure (\ref{fig:svm_c}) is an error plot of cross validation in the range of C. The selected C value hyper-parameter is $100$ as shown in the figure. The weight of the penalty is controlled by hyper-parameter C, higher value results in lower weight likewise for lower value as described by equation (\ref{eqn:svm_cost_function}).
+
 
 \section{Results}
 
