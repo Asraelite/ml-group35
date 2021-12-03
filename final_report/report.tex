@@ -12,6 +12,9 @@
 \usepackage{lastpage}
 \usepackage{lipsum}
 \usepackage{hyperref}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
 \graphicspath{ {../notebook/img/} }
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 %\markboth{$>$ REPLACE THIS LINE WITH YOUR PAPER IDENTIFICATION NUMBER $<$}
@@ -206,6 +209,38 @@ F_1 \textnormal{score}\ = \frac{2TP}{2TP+FN+FP}
 
 
 \section{Results}
+
+\begin{figure}[h]
+	\includegraphics[width=\columnwidth]{svm_with_baselines.png} 
+    \caption{ROC curve plot of all algorithms}%
+    \label{fig:results_roc}%
+\end{figure}
+
+\begin{table*}[!bh]
+
+\begin{tabularx}{\textwidth}{|| p{5cm} | X | X | X | X | X | X | X | X ||}
+\hline
+\multirow{2}{*}{\textbf{Algorithm}}  & \multicolumn{2}{c|}{\textbf{F1 Score}} & \multicolumn{2}{c|}{\textbf{Recall}} & \multicolumn{2}{c|}{\textbf{Precision}} & \multirow{2}{*}{\textbf{Accuracy}} & \multirow{2}{*}{\textbf{AUC}} \\ 
+\cline{2-7}
+& \centering +1& \centering -1 & \centering +1 & \centering -1 & \centering +1 & \centering -1 & & \\ 
+\hline
+Most Common (baseline) & 0.73 & 0.00 & 1.00 & 0.00 & 0.58 & 0.00 & 0.58 & 0.50 \\
+\hline
+Random (baseline) & 0.57 & 0.53 & 0.51 & 0.61 & 0.64 & 0.47 & 0.55 & 0.52 \\
+\hline
+k-Nearest Neightbours (kNN) & - & - & - & - & - & - & - & - \\
+\hline
+Logistic Regression & - & - & - & - & - & - & - & - \\
+\hline
+Support Vector Machine (SVM) & 0.63 & 0.53 & 0.60 & 0.56 & 0.65 & 0.51 & 0.59 & 0.60 \\
+\hline
+
+\hline
+\end{tabularx}
+\caption{Results of algorithms with evaluation metrics}
+    \label{tab:results}%
+\end{table*}
+
 
 \section{Discussion}
 
