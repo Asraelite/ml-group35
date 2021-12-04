@@ -48,7 +48,7 @@
 %\section{INTRODUCTION}
 \section{Introduction}
 % explain the problem and why it is interesting
-\IEEEPARstart{T}{he} cryptocurrency market have witnessed an explosion in the recent years with Bitcoin\footnote{\ Bitcoin is the first well known cryptocurrency started in the late 2000s} hitting lots of new time high and many investors moving to this trading space \cite{huy2019predicting}. With the internet constantly evolving, social networking sites such as Facebook, Twitter, Instagram and etc have become a means of communication between people. There have been researches in text sentiment analysis to predict price changes for Bitcoin \cite{huy2019predicting}\cite{sattarov2020forecasting} as Bitcoin is considered a dominant cryptocurrency. However many other cryptocurrency have been developed and have been in demand such as Ethereum \footnote{\ Ethereum is a programmable blockchain and cryptocurrency described as Ether}. The project will be tackling Ethereum market price by estimating if the future price increases or decreases based on text processing sourced from the web such as social networking sites and forums. The problem is converted into a classfication problem by comparing the future market price with current market price instead of a regression problem of estimating the future market price. Can news or posts of Ethereum articles really affect the market price?
+\IEEEPARstart{T}{he} cryptocurrency market have witnessed an explosion in the recent years with Bitcoin\footnote{\ Bitcoin is the first well known cryptocurrency started in the late 2000s} hitting lots of new time high and many investors moving to this trading space \cite{huy2019predicting}. With the internet constantly evolving, social networking sites such as Facebook, Twitter, Instagram and etc have become a means of communication between people. There have been researches in text sentiment analysis to predict price changes for Bitcoin \cite{huy2019predicting}\cite{sattarov2020forecasting} as Bitcoin is considered a dominant cryptocurrency. However many other cryptocurrency have been developed and in demand such as Ethereum\footnote{\ Ethereum is a programmable blockchain and cryptocurrency described as Ether}. The project will be tackling Ethereum market price by estimating if the future price increases or decreases based on text processing sourced from the web such as social networking sites and forums. The problem is converted into a classfication problem by comparing the future market price with current market price instead of a regression problem of estimating the future market price. Can news or posts of Ethereum articles really affect the market price?
 
 \noindent The input to our algorithm is text sourced web scrapers on social networking sites. We then compare several machine learning methods such as k-Nearest Neighbours (kNN), logistic regression and Support Vector Machine (SVM) to output a predicted label, +1 if price increased or -1 if price decreased.
 
@@ -69,16 +69,19 @@
 \subsubsection{Binance}
 \noindent Binance provides a set of API \cite{binance_web_socket}, WebSocket endpoints available to collect live data and old historical data \cite{binance_public_data}. Monthly trade data of ETHUSDT\footnote{\ ETHUSDT is a symbol for Ethereum and USDT pair, 1 USDT is 1 USD.} symbol is collected from August, 2017 to October, 2021 with a total of 657,446,190 data points. These data points are processed by calculating the average price by days and discretizing the continuous values into +1 and -1 class labels by comparing it with the previous day resulting into 1,537 data points.
 
-\begin{figure}[h!]
-    \centering
-    \subfloat[Mean price against Data points]{{\includegraphics[width=0.5\columnwidth]{binance_mean_price.png} }}%
-%    \qquad
-    \subfloat[Count against labels]{{\includegraphics[width=0.5\columnwidth]{binance_label.png} }}%
-    \caption{Overview of Binance dataset collected}%
-    \label{fig:binance_overview}%
+\begin{figure}[h]
+	\includegraphics[width=\columnwidth]{binance_mean_price.png} 
+    \caption{Mean price against Data points}%
+    \label{fig:binance_overview_mean_price}%
 \end{figure}
 
-\noindent There is another class label "0" in figure \ref{fig:binance_overview}.b. This is due to the first day of every month unable to calculate different with the day before. It was set to "-1" to have binary labels.
+\begin{figure}[h]
+	\includegraphics[width=\columnwidth]{binance_label.png} 
+    \caption{Count against labels}%
+    \label{fig:binance_overview_count}%
+\end{figure}
+
+\noindent There is another class label "0" in figure \ref{fig:binance_overview_count}. This is due to the first day of every month unable to calculate different with the day before. It was set to "-1" to have binary labels.
 
 \subsection{Feature Extraction}
 
@@ -90,7 +93,7 @@
   \item Removing words containing non\-english characters.
 \end{itemize}
 
-\noindent These sequence of tokens are mapped to a feature vector using the bag of words model, the model consists of hyper-parameter n-grams and cross validation for 1-gram single token and 2-gram pairs of token are evaluated in section ???. The n-gram hyper-parameter enables model to preserve some word ordering but feature vector size can grow quickly.
+\noindent These sequence of tokens are mapped to a feature vector using the bag of words model, the model consists of hyper-parameter n-grams and cross validation for 1-gram single token and 2-gram pairs of token. The n-gram hyper-parameter enables model to preserve some word ordering but feature vector size can grow quickly. The resulting number of feature is $7146$ after applying preprocessing step.
 
 \section{Methods}
 \label{methods}
@@ -172,7 +175,7 @@ Equation \ref{eqn:svm_penalty} is the sum of squares elements in parameter vecto
 
 
 \section{Experiments}
-\noindent 5-fold cross validation were used to select hyper-parameters for models mentioned in section \ref{methods}. The dataset metioned in section \ref{data_source} were grouped by dates resulting with a total of 1400 data points from \emph{2018-01-01} to \emph{2021-10-31}. The dataset was split into training and test set with a ratio of $80:20$. The baseline models used to evaluate against these models were a model always predicting the most common class and a model randomly predicting class.
+\noindent 5-fold cross validation was used to select hyper-parameters for models mentioned in section \ref{methods}. The dataset metioned in section \ref{data_source} were grouped by dates resulting in a total of 1400 data points from \emph{2018-01-01} to \emph{2021-10-31}. The dataset was split into train and test set with a ratio of $80:20$. The baseline models used to evaluate against these models were a model always predicting the most common class and a model randomly predicting class.
 
 \label{sec:metric}
 \noindent The choice of metric used for evaluation $F_1$ score, recall, precision and accuracy. The ROC curve and AUC were also plotted and compared with other classifiers and baseline.
@@ -330,10 +333,11 @@ if                                  & 347963                                  \\
 
 \section{Summary}
 
+\noindent The project attempts to determine if posts of Ethereum articles on social networking sites can actually affect the market price. The bag of word model was used to extract features from the text content mapping data to features. The features size were greatly reduced from preprocessing steps. Several supervised machine learning algorithms were considered and evaluated in this project.
 
+\noindent Logistic regression and Support Vector Machine (SVM) models were able to learn some information from the training dataset performing slightly better than the baseline models. However the k-Nearest Neighbour (kNN) model performed the worst in the experiment. The quality of the dataset is important for machine learning models. Logistic regression and SVM worked because it relied heavily on regularisation. KNN depends heavily on the training points. As seen in table (\ref{tab:top30words}) the text scraped from Twitter and Reddit contain many less informative words.
 
-
-
+\noindent The conclusion drawn from the project is the ability of machine learning models to predict price change of Ethereum market depends on the quality of text input. The performance from the resulting models have little practicality in real-world usage and future work can explore processing input text and utilising complex learning algorithms.
 
 
 
