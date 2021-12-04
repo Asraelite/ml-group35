@@ -208,6 +208,24 @@ F_1 \textnormal{score}\ = \frac{2TP}{2TP+FN+FP}
 \end{figure}
 \noindent Figure (\ref{fig:knn_k}) is an error plot of cross validation in the range of \emph{k}. The selected \emph{k} hyper-parameter is 465 as shown in the figure. Smaller values of \emph{K} such as 1 are over-fitting as the $F_1$ score  for train data is higher than test data.
 
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{l|l|c|c|c}
+\multicolumn{2}{c}{}&\multicolumn{2}{c}{}&\\
+\cline{3-4}
+\multicolumn{2}{c|}{}& Predicted Positive & Predicted Negative &\multicolumn{1}{c}{Total}\\
+\cline{2-4}
+\multirow{2}{*}{}& True Positive & $155$ & $7$ & $162$\\
+\cline{2-4}
+& True Negative & $114$ & $4$ & $118$\\
+\cline{2-4}
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{Total} & \multicolumn{1}{c}{$269$} & \multicolumn{    1}{c}{$11$} & \multicolumn{1}{c}{$280$}\\
+\end{tabular}
+\end{center}
+\caption{kNN confusion matrix} 
+\label{table:confusion_knn}
+\end{table}
+
 \subsection{Logistic Regression}
 \noindent The L2 penalty term described in equation (\ref{eqn:logistic_l2}) is used for the logistic regression. The range of C values used are from \num{1e-10} to \num{9.51e-08} with incremental of \num{5e-09} to select hyper-parameter for the penalty term through cross validation.
 
@@ -217,7 +235,43 @@ F_1 \textnormal{score}\ = \frac{2TP}{2TP+FN+FP}
     \label{fig:logistic_c}%
 \end{figure}
 
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{l|l|c|c|c}
+\multicolumn{2}{c}{}&\multicolumn{2}{c}{}&\\
+\cline{3-4}
+\multicolumn{2}{c|}{}& Predicted Positive & Predicted Negative &\multicolumn{1}{c}{Total}\\
+\cline{2-4}
+\multirow{2}{*}{}& True Positive & $159$ & $3$ & $162$\\
+\cline{2-4}
+& True Negative & $106$ & $12$ & $118$\\
+\cline{2-4}
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{Total} & \multicolumn{1}{c}{$265$} & \multicolumn{    1}{c}{$15$} & \multicolumn{1}{c}{$280$}\\
+\end{tabular}
+\end{center}
+\caption{Logistic regression confusion matrix} 
+\label{table:confusion_logistic}
+\end{table}
+
 \noindent Figure (\ref{fig:logistic_c}) is an error plot of cross validation in the range of C. The selected C value hyper-parameter is \num{3.51e-08} as shown the figure. Such small figures were used to increase weighting of the penalty term to prevent over-fitting.
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{l|l|c|c|c}
+\multicolumn{2}{c}{}&\multicolumn{2}{c}{}&\\
+\cline{3-4}
+\multicolumn{2}{c|}{}& Predicted Positive & Predicted Negative &\multicolumn{1}{c}{Total}\\
+\cline{2-4}
+\multirow{2}{*}{}& True Positive & $159$ & $3$ & $162$\\
+\cline{2-4}
+& True Negative & $106$ & $12$ & $118$\\
+\cline{2-4}
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{Total} & \multicolumn{1}{c}{$265$} & \multicolumn{    1}{c}{$15$} & \multicolumn{1}{c}{$280$}\\
+\end{tabular}
+\end{center}
+\caption{SVM confusion matrix} 
+\label{table:confusion_svm}
+\end{table}
 
 
 \subsection{Support Vector Machine}
@@ -271,7 +325,7 @@ Support Vector Machine (SVM) & 0.74 & 0.18 & 0.98 & 0.10 & 0.60 & 0.80 & 0.61 & 
 \section{Discussion}
 \noindent The logistic regression and SVM model relies heavily on the penalty term due to small \emph{C} hyper-parameter, both these models use the same L2 penalty term in equation (\ref{eqn:logistic_l2}). As the weight of penalty term increases, the learning algorithm minimises this term resulting in very similar scores between logistic regression and SVM models. Table (\ref{tab:top10words}) describes the top 10 words and weights of logistic regression and SVM models. The list has the same words but differs slightly in ranking and weights are similar. Based on human intuition, these list of words are not informative in determining a price increase or decrease.
 
-\begin{figure}[h]
+\begin{table}[h]
 \begin{center}
 \begin{tabular}{|l|ll|ll|}
 \hline
@@ -291,11 +345,11 @@ Support Vector Machine (SVM) & 0.74 & 0.18 & 0.98 & 0.10 & 0.60 & 0.80 & 0.61 & 
 \end{center}
 \caption{List of Top 10 words and weights of logistic regression and SVM models}
     \label{tab:top10words}
-\end{figure}
+\end{table}
 
 \noindent The ROC curve shows balance between true and false positives rate and each model's ROC curve is plotted in figure (\ref{fig:results_roc}). Logistic regression and SVM models performed slightly better than the baseline models, KNN performed worse than the baseline models. Logistic regression performed better than SVM model at lower false positive rate. SVM model performed better than logistic regression at higher false positive rate.
 
-\begin{figure}[h]
+\begin{table}[h]
 \begin{center}
 \begin{tabular}{|l|l|}
 \hline
@@ -324,7 +378,7 @@ if                                  & 347963                                  \\
 \end{center}
 \caption{List of top 30 most frequent words in the dataset}
     \label{tab:top30words}
-\end{figure}
+\end{table}
 
 \noindent Table (\ref{tab:top30words}) lists the top 30 most frequent word in the dataset after preprocessing. There is large differences between frequency of words in the dataset with least common word "lolol" having a frequency of 145.
 
