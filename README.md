@@ -1,11 +1,12 @@
 # ml-group35
 
 ## Contents
-1. Generating dataset  
+1. [Generating dataset ](#generating-dataset)
   1.1 [Binance Trade Data](#binance-trade-data)  
   1.2 [Reddit comment data](#reddit-comment-data)  
   1.3 [Twitter tweet data](#twitter-tweet-data)  
-2. 
+2. [Dataset on Google Drive](#dataset-on-google-drive)
+3. [Training and Testing](#training-and-testing)
 
 ## Generating dataset
 
@@ -85,3 +86,9 @@ The data is in the format
 	...
 ]
 ```
+
+## Dataset on Google Drive
+The Binance, Twitter, Reddit and models dataset are available at here at [Google Drive](https://drive.google.com/drive/folders/16DK3Qa521FzsuO13rmiQHnLaNB-tlbEe?usp=sharing).
+
+## Training and Testing
+Jupyter notebooks are used for training and testing, each algorithm has a notebook and the evaluation notebook loads all models to evaluate against baseline models.
